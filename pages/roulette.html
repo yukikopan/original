@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+
+<title></title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="shortcut icon" href="/favicon.ico" />
+
+
+
+<style type="text/css">
+<!--
+
+* {margin:0; padding:0;}
+#wrap {
+   margin:50px auto 0;
+   width:240px;
+   position:relative;
+}
+#roulette {
+   padding:25px 0 0;
+}
+#hari {
+   margin-left:-5px;
+   position:absolute;
+   top:0;
+   left:50%;
+}
+#result {
+   padding:20px;
+   text-align:center;
+   color: red;
+   font-weight: bold;
+}
+
+body{
+    background-color: aquamarine;
+}
+
+.toy{
+    position: relative;
+}
+
+.toy h2{
+    position: absolute;
+    color: white;
+    font-weight: bold;
+    font-size: 3em;
+    top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  margin:0;
+  padding:0;
+  font-family :Quicksand, sans-serif;
+
+}
+
+.nav {
+    font-style: normal;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: right;
+    margin-left:30px;
+    margin-right: 30px;
+    margin-top: 30px;
+    background-color: beige;
+}
+
+.nav-item{
+    display: inline-block;
+    
+}
+
+.nav-link{
+    color:black;
+    
+}
+
+:hover{
+    color: #999999;
+}
+
+-->
+</style>
+
+<ul class="nav justify-content-end">
+  <li class="nav-item">
+    <a class="nav-link active" href="">HOME</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="outi.html">おうち時間</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="warning.html">外での注意点</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link " href="outside.html">オススメの場所</a>
+  </li>
+</ul>
+
+
+<div class="toy">
+<img src="img/toys-3200969_1920.jpg" width="100%" height="400px" >
+<h2>今日は何して遊ぼう！？
+    <br>迷った時には、、</h2>
+</div>
+
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="jQueryRotate.js"></script>
+<script type="text/javascript">
+$(function(){
+   
+   var speed = 10;   //ルーレットの回転速度
+   var divide = 5;   //ルーレットの分割数
+   var timeout = 2000;   //○秒後に停止
+   
+   //停止位置の設定。1～360までの乱数を取得して挿入する
+   var stopAngle = Math.round(Math.random () * 360 + 0.5);
+   
+   //ルーレットの角度の変数。停止位置の値を初期値に設定する
+   var angle = stopAngle;
+   
+   //ルーレットの分割数から1エリア分の角度を求める。今回は5分割なので72が入ってます
+   var section = 360/divide;
+   
+   //停止位置がどのエリアにあるか調べ、該当する番号をstopNumberに格納
+   for(i=1; i<=divide; i++){
+      if(section*(i-1)+1 <= stopAngle && stopAngle <= section*i) {
+         stopNumber = i;
+      }
+   };
+   
+   
+   //クルクル処理。5ミリ秒毎にspeedの数値分画像が回転します。
+   var rotation = setInterval(function(){
+      $("#mato").rotate(angle);
+      angle += speed;
+   }, 5);
+   
+   
+   //timeout秒後に停止させる処理
+   setTimeout(function(){
+      
+      //クルクル処理をしているsetIntervalをclear
+      clearInterval(rotation);
+      
+      //setIntervalで増えた余分な数値を減らし、逆回転を防ぐためにマイナス値にする
+      angle = angle%360-360;
+      
+      //停止位置までのアニメーション。完了するとresult()が実行される
+      $("#mato").rotate({
+         angle: angle, 
+         animateTo: stopAngle,
+         callback: result
+      });
+      
+     
+
+    }, timeout);
+    
+    
+    //ルーレット停止後に実行される処理
+    var result = function(){
+       switch(stopNumber){
+          
+          //1の時の処理
+          case 1:
+            $("#result span").text("①今日は「風船トランポリン」で遊ぶ！")
+            break;
+          
+          //2の時の処理
+          case 2:
+            $("#result span").text("②今日は「ダンボールハウス」を作る！")
+            break;
+          
+          //3の時の処理
+          case 3:
+            $("#result span").text("③今日は「おうちでイチゴ狩り」をする！")
+            break;
+          
+          //4の時の処理 
+          case 4:
+            $("#result span").text("④「与座川」に行ってみる！")
+            break;
+          
+          //5の時の処理
+          case 5:
+            $("#result span").text("⑤「カーミージー」に行ってみる！")
+            break;
+       
+       };
+
+    };
+
+});
+
+</script>
+
+</head>
+<body>
+<div id="wrap">
+   
+   <div id="roulette">
+      <img src="img/mato.png" id="mato">
+   </div>
+   <div id="hari"><img src="img/hari.png"></div>
+   
+   <div id="result">結果は・・・<span></span></div>
+     
+   <p>今日の予定は、、、</p>
+   <p>①今日は「風船トランポリン」で遊ぶ！</p>
+   <p>②今日は「ダンボールハウス」を作る！</p>
+   <p>③今日は「おうちでイチゴ狩り」をする！</p>
+   <p>④「与座川」に行ってみる！</p>
+   <p>⑤「カーミージー」に行ってみる！</p>
+   <p>この５つのうちのどれか！</p>
+   
+   </div>
+   
+
+
+
+</body>
+</html>

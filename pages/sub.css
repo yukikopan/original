@@ -1,0 +1,123 @@
+
+.card-header {
+  border-radius: 120px;
+  border-color: lightskyblue;
+  border-width: 9px;
+  
+}
+
+.map{
+    text-align: center;
+    padding-top: 30px;
+}
+
+
+.slide{
+    width: 80%;
+    height:80% ;
+    text-align: center;
+    margin: auto;
+    padding-top: 30px;
+}
+
+
+.slide2{
+    width: 80%;
+    height:80% ;
+    text-align: center;
+    margin: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+
+
+
+.title{
+    text-align: center;
+    padding-top: 30px;
+    color: blue;
+    letter-spacing: 20px;
+}
+
+
+.title2{
+    padding-top: 60px;
+    text-align: center;
+    color: blue;
+    letter-spacing: 10px;
+
+}
+
+
+.title3{
+    padding-left: 50px;
+}
+
+.accbox{
+    padding-bottom: 50px;
+}
+
+.accordion{
+    padding: 20px;
+  
+}
+
+.korona{
+    letter-spacing: 5px;
+    padding: 50px;
+}
+
+
+
+
+
+
+/*ボックス全体*/
+.accbox {
+    margin: 2em 0;
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+/*ラベル*/
+.accbox label {
+    display: block;
+    margin: 1.5px 0;
+    padding : 11px 12px;
+    color :darkblue;
+    font-weight: bold;
+    background :rgb(90, 235, 90);
+    cursor :pointer;
+    transition: all 0.5s;
+    border-radius: 10px;
+}
+
+/*ラベルホバー時*/
+.accbox label:hover {
+    background :lightseagreen;
+}
+
+/*チェックは隠す*/
+.accbox input {
+    display: none;
+}
+
+/*中身を非表示にしておく*/
+.accbox .accshow {
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: 0.8s;
+}
+
+/*クリックで中身表示*/
+.cssacc:checked + .accshow {
+    height: auto;
+    padding: 5px;
+    background: lightyellow;
+    opacity: 1;
+}

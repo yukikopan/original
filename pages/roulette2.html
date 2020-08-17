@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="shortcut icon" href="/favicon.ico" />
+
+  <title>Clean Blog - Start Bootstrap Theme</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+  <!-- Custom styles for this template -->
+  <link href="css/clean-blog.min.css" rel="stylesheet">
+
+  <link href="sub.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="post.html">Sample Post</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('img/myles-tan-WNAO036c6FM-unsplash.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+            <h1>外で遊ぶ時の注意</h1>
+            <h2 class="subheading">今は外で遊ぶ時どんな注意が必要でしょうか？</h2> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+<!--
+
+ {margin:0; padding:0;}
+#wrap {
+   margin:50px auto 0;
+   width:240px;
+   position:relative;
+}
+#roulette {
+   padding:25px 0 0;
+}
+#hari {
+   margin-left:-5px;
+   position:absolute;
+   top:0;
+   left:50%;
+}
+#result {
+   padding:20px;
+   text-align:center;
+}
+
+-->
+</style>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="jQueryRotate.js"></script>
+<script type="text/javascript">
+$(function(){
+   
+   var speed = 10;   //ルーレットの回転速度
+   var divide = 5;   //ルーレットの分割数
+   var timeout = 2000;   //○秒後に停止
+   
+   //停止位置の設定。1～360までの乱数を取得して挿入する
+   var stopAngle = Math.round(Math.random () * 360 + 0.5);
+   
+   //ルーレットの角度の変数。停止位置の値を初期値に設定する
+   var angle = stopAngle;
+   
+   //ルーレットの分割数から1エリア分の角度を求める。今回は5分割なので72が入ってます
+   var section = 360/divide;
+   
+   //停止位置がどのエリアにあるか調べ、該当する番号をstopNumberに格納
+   for(i=1; i<=divide; i++){
+      if(section*(i-1)+1 <= stopAngle && stopAngle <= section*i) {
+         stopNumber = i;
+      }
+   };
+   
+   
+   //クルクル処理。5ミリ秒毎にspeedの数値分画像が回転します。
+   var rotation = setInterval(function(){
+      $("#mato").rotate(angle);
+      angle += speed;
+   }, 5);
+   
+   
+   //timeout秒後に停止させる処理
+   setTimeout(function(){
+      
+      //クルクル処理をしているsetIntervalをclear
+      clearInterval(rotation);
+      
+      //setIntervalで増えた余分な数値を減らし、逆回転を防ぐためにマイナス値にする
+      angle = angle%360-360;
+      
+      //停止位置までのアニメーション。完了するとresult()が実行される
+      $("#mato").rotate({
+         angle: angle, 
+         animateTo: stopAngle,
+         callback: result
+      });
+      
+     
+
+    }, timeout);
+    
+    
+    //ルーレット停止後に実行される処理
+    var result = function(){
+       switch(stopNumber){
+          
+          //1の時の処理
+          case 1:
+            $("#result span").text("①今日は「風船トランポリン」で遊ぶ！")
+            break;
+          
+          //2の時の処理
+          case 2:
+            $("#result span").text("②今日は「ダンボールハウス」を作る！")
+            break;
+          
+          //3の時の処理
+          case 3:
+            $("#result span").text("③今日は「おうちでイチゴ狩り」をする！")
+            break;
+          
+          //4の時の処理 
+          case 4:
+            $("#result span").text("④「与座川」に行ってみる！")
+            break;
+          
+          //5の時の処理
+          case 5:
+            $("#result span").text("⑤「カーミージー」に行ってみる！")
+            break;
+       
+       };
+
+    };
+
+});
+
+</script>
+
+</head>
+<body>
+<div id="wrap">
+   
+   <div id="roulette">
+      <img src="img/mato.png" id="mato">
+   </div>
+   <div id="hari"><img src="img/hari.png"></div>
+   
+   <div id="result">結果は・・・<span></span></div> 
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+          <p class="copyright text-muted">Copyright &copy; Your Website 2020</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
